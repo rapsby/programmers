@@ -16,4 +16,5 @@ def solution(N, road, K):
                 q.put([src, next_cost])
     return len([i for i in dist if i <= K])
 
+
 print(solution(5, [[1,2,1],[2,3,3],[5,2,2],[1,4,2],[5,3,1],[5,4,2]], 3))
