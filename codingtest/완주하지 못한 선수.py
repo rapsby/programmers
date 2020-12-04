@@ -2,7 +2,7 @@ def solution(participant, completion):
     d = {}
     
     for p in participant:
-        # d.get(p, 0) -> if p in d: return d[p] else: return 0
+        # d.get(p, 0) -> if p in d: return p else: return 0
         d[p] = d.get(p, 0) + 1
 
     for c in completion:
