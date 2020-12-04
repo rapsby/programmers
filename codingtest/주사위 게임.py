@@ -6,7 +6,7 @@ def solution(monster, S1, S2, S3):
     prod = list(map(sum,product(l1, l2, l3)))
     cnt = 0
     for p in prod:
-        if p + 1 in monster and p <= S1 + S2 + S3 + 1:
+        if p + 1 in monster:
             cnt += 1
     return int((len(prod)-cnt)/len(prod)*1000)
 
