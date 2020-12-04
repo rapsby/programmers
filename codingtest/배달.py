@@ -11,7 +11,7 @@ def solution(N, road, K):
             if src == current and next_cost < dist[dest]:
                 dist[dest] = next_cost
                 q.put([dest, next_cost])
-            elif dest == current and next_cost < dist[src]:
+            if dest == current and next_cost < dist[src]:
                 dist[src] = next_cost
                 q.put([src, next_cost])
     return len([i for i in dist if i <= K])
