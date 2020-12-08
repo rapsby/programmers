@@ -1,39 +1,34 @@
-def stable(wall):
-    for i in range(len(wall)+1):
-        for j in range(len(wall)+1):
-            if wall[i][j] == 0:
-                continue
-            if wall[i][j] and 1:
-                if 
-                pass
-            if wall[i][j] and 2:
-                if i != 0:
-                    if wall[i-1][j] and 1 != 0:
-                        if not (j-1 >= 0 and wall[i][j-1] and 2):
-                            if not (j+1 <= len(wall) and wall[i][j+1] and 2):
-                                return False
-    return True
-#보는 한쪽 끝 부분이 기둥 위에 있거나, 또는 양쪽 끝 부분이 다른 보와 동시에 연결되어 있어야 합니다.
-#기둥은 바닥 위에 있거나 보의 한쪽 끝 부분 위에 있거나, 또는 다른 기둥 위에 있어야 합니다.
-    return True
-def solution(n, build_frame):
-    wall = [[[0] * (n+1)] for _ in range(n+1)]
-    for x, y, crossbeam, install in build_frame:
-        y = n-y
+def stable(constructure):
+    for x, y, crossbeam in constructure:
         if crossbeam:
-            wall[y][x] += install
-            if not stable(wall):
-                wall[y][x] -= install
+            if (x, y-1, 0) in constructure or (x+1, y-1, 0) in constructure or ((x-1, y, 1) in constructure and (x+1, y, 1) in constructure):
+                continue
+            else:
+                return False
         else:
-            wall[y][x] += 2 * install
-            if not stable(wall):
-                wall[y][x] -= 2 * install
+            if y == 0 or (x-1, y, 1) in constructure or (x, y, 1) in constructure or (x, y-1, 0) in constructure:
+                continue
+            else:
+                return False
+    return True
 
-    answer = [[]]
+def solution(n, build_frame):
+    answer = set()
+    for x, y, crossbeam, install in build_frame:
+        if install:
+            answer.add((x, y, crossbeam))
+            if not stable(answer):
+                answer.remove((x, y, crossbeam))
+        else:
+            answer.remove((x, y, crossbeam))
+            if not stable(answer):
+                answer.add((x, y, crossbeam))
+    answer = list(map(list,answer))
+    answer.sort()
     return answer
 
 n = 5
 build_frame = [[1,0,0,1],[1,1,1,1],[2,1,0,1],[2,2,1,1],[5,0,0,1],[5,1,0,1],[4,2,1,1],[3,2,1,1]]	
-#print(solution(n, build_frame))
-
-print(3 and 2)
+build_frame = [[0,0,0,1],[2,0,0,1],[4,0,0,1],[0,1,1,1],[1,1,1,1],[2,1,1,1],[3,1,1,1],[2,0,0,0],[1,1,1,0],[2,2,0,1]]
+build_frame = [[0,0,0,1],[2,0,0,1],[4,0,0,1],[0,1,1,1],[1,1,1,1],[2,1,1,1],[3,1,1,1],[2,0,0,0],[1,1,1,0],[2,2,0,1]]	
+print(solution(n, build_frame))
