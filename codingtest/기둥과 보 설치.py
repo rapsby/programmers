@@ -1,12 +1,14 @@
 def stable(constructure):
     for x, y, crossbeam in constructure:
         if crossbeam:
-            if (x, y-1, 0) in constructure or (x+1, y-1, 0) in constructure or ((x-1, y, 1) in constructure and (x+1, y, 1) in constructure):
+            if (x, y-1, 0) in constructure or (x+1, y-1, 0) in constructure \
+                or ((x-1, y, 1) in constructure and (x+1, y, 1) in constructure):
                 continue
             else:
                 return False
         else:
-            if y == 0 or (x-1, y, 1) in constructure or (x, y, 1) in constructure or (x, y-1, 0) in constructure:
+            if y == 0 or (x-1, y, 1) in constructure \
+                or (x, y, 1) in constructure or (x, y-1, 0) in constructure:
                 continue
             else:
                 return False
